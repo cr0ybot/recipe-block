@@ -1,5 +1,5 @@
 /**
- * BLOCK: recipe-block
+ * BLOCK: recipetron
  *
  * Registering a basic block with Gutenberg.
  * Simple block, renders and saves the same content without any interactivity.
@@ -25,11 +25,11 @@ const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.b
  * @return {?WPBlock}          The block, if it has been successfully
  *                             registered; otherwise `undefined`.
  */
-registerBlockType( 'cr0ybot/recipe-block', {
+registerBlockType( 'recipetron/recipe', {
 	// Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
-	title: __( 'Recipe Block' ), // Block title.
+	title: __( 'Recipe' ), // Block title.
 	icon: 'media-document', // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
-	category: 'common', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
+	category: 'recipetron', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
 	keywords: [
 		__( 'recipe' ),
 	],
@@ -46,12 +46,12 @@ registerBlockType( 'cr0ybot/recipe-block', {
 	 * @returns {Mixed} JSX Component.
 	 */
 	edit: ( props ) => {
-		// Creates a <p class='wp-block-cgb-block-recipe-block'></p>.
+		// Creates a <p class='wp-block-cgb-block-recipetron'></p>.
 		return (
 			<div className={ props.className }>
 				<p>— Hello from the backend.</p>
 				<p>
-					CGB BLOCK: <code>recipe-block</code> is a new Gutenberg block
+					CGB BLOCK: <code>recipetron</code> is a new Gutenberg block
 				</p>
 				<p>
 					It was created via{ ' ' }
@@ -81,7 +81,7 @@ registerBlockType( 'cr0ybot/recipe-block', {
 			<div className={ props.className }>
 				<p>— Hello from the frontend.</p>
 				<p>
-					CGB BLOCK: <code>recipe-block</code> is a new Gutenberg block.
+					CGB BLOCK: <code>recipetron</code> is a new Gutenberg block.
 				</p>
 				<p>
 					It was created via{ ' ' }

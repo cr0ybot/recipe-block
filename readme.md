@@ -1,6 +1,6 @@
 
-Recipe Block
-============
+Recipetron
+==========
 
 A WordPress plugin for adding recipes to your posts with Gutenberg.
 

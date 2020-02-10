@@ -5,7 +5,7 @@
  * Enqueue CSS/JS of all the blocks.
  *
  * @since   0.1.0
- * @package recipe-block
+ * @package recipetron
  */
 
 // Exit if accessed directly.
@@ -27,10 +27,10 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @uses {wp-editor} for WP editor styles.
  * @since 0.1.0
  */
-function recipe_block_assets() { // phpcs:ignore
+function recipetron_assets() { // phpcs:ignore
 	// Register block styles for both frontend + backend.
 	wp_register_style(
-		'recipe-block', // Handle.
+		'recipetron', // Handle.
 		plugins_url( 'dist/blocks.style.build.css', dirname( __FILE__ ) ), // Block style CSS.
 		array(), // Dependency to include the CSS after it.
 		null // filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.style.build.css' ) // Version: File modification time.
@@ -38,7 +38,7 @@ function recipe_block_assets() { // phpcs:ignore
 
 	// Register block editor styles for backend.
 	wp_register_style(
-		'recipe-block-editor', // Handle.
+		'recipetron-editor', // Handle.
 		plugins_url( 'dist/blocks.editor.build.css', dirname( __FILE__ ) ), // Block editor CSS.
 		array( 'wp-edit-blocks' ), // Dependency to include the CSS after it.
 		null // filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.editor.build.css' ) // Version: File modification time.
@@ -46,7 +46,7 @@ function recipe_block_assets() { // phpcs:ignore
 
 	// Register block editor script for backend.
 	wp_register_script(
-		'recipe-block', // Handle.
+		'recipetron', // Handle.
 		plugins_url( '/dist/blocks.build.js', dirname( __FILE__ ) ), // Block.build.js: We register the block here. Built with Webpack.
 		array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ), // Dependencies, defined above.
 		filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.build.js' ), // Version: filemtime — Gets file modification time.
@@ -55,7 +55,7 @@ function recipe_block_assets() { // phpcs:ignore
 
 	// WP Localized globals. Use dynamic PHP stuff in JavaScript via `plugin` object.
 	wp_localize_script(
-		'recipe-block',
+		'recipetron',
 		'plugin',
 		array(
 			'pluginDirPath' => plugin_dir_path( __DIR__ ),
@@ -74,14 +74,30 @@ function recipe_block_assets() { // phpcs:ignore
 	 * @since 1.16.0
 	 */
 	register_block_type(
-		'cr0ybot/recipe-block', array(
+		'recipetron/recipe', array(
 			// Enqueue blocks.style.build.css on both frontend & backend.
-			'style'         => 'recipe-block',
+			'style'         => 'recipetron',
 			// Enqueue blocks.build.js in the editor only.
-			'editor_script' => 'recipe-block',
+			'editor_script' => 'recipetron',
 			// Enqueue blocks.editor.build.css in the editor only.
-			'editor_style'  => 'recipe-block-editor',
+			'editor_style'  => 'recipetron-editor',
 		)
 	);
 }
-add_action( 'init', 'recipe_block_assets' );
+add_action( 'init', 'recipetron_assets' );
+
+function recipetron_block_category( $categories, $pots ) {
+
+	return array_merge(
+		$categories,
+		array(
+			array(
+				'slug' => 'recipetron',
+				'title' => __( 'Recipetron', 'recipetron' ),
+				'icon'  => '<svg version="1.1" id="recipetron" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;" xml:space="preserve"><g><path d="M20,10H4v0c0-1.1,0.9-2,2-2h12C19.1,8,20,8.9,20,10L20,10z"/><path d="M20,13v-2H4v2c-1.1,0-2,0.9-2,2h2v3c0,1.1,0.9,2,2,2h12c1.1,0,2-0.9,2-2v-3h2C22,13.9,21.1,13,20,13z M7.5,17 C6.7,17,6,16.3,6,15.5S6.7,14,7.5,14S9,14.7,9,15.5S8.3,17,7.5,17z M14,18h-4v-1h4V18z M16.5,17c-0.8,0-1.5-0.7-1.5-1.5 s0.7-1.5,1.5-1.5s1.5,0.7,1.5,1.5S17.3,17,16.5,17z"/><rect x="10" y="5" width="4" height="2"/></g></svg>',
+			),
+		)
+	);
+	return $categories;
+}
+add_filter( 'block_categories', 'recipetron_block_category', 10, 2 );

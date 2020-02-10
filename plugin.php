@@ -1,7 +1,7 @@
 <?php
 /**
- * Plugin Name: Recipe Block
- * Plugin URI: https://github.com/cr0ybot/recipe-block/
+ * Plugin Name: Recipetron
+ * Plugin URI: https://github.com/cr0ybot/recipetron/
  * Description: Add recipes to your posts as a Gutenberg block.
  * Author: Cory Hughart
  * Author URI: https://coryhughart.com/
@@ -9,7 +9,7 @@
  * License: GPL2+
  * License URI: https://www.gnu.org/licenses/gpl-2.0.txt
  *
- * @package recipe-block
+ * @package recipetron
  */
 
 // Exit if accessed directly.
